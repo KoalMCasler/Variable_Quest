@@ -41,19 +41,19 @@ namespace VariablesProject
             Encounter();
             while (CurrentHP > 0)
                 {
-                    Console.WriteLine("Press any Key to attack!");
+                    Console.WriteLine("\nPress any Key to attack!");
                     Console.ReadKey();
                     Combat();
                     HUD();
                     if (CurrentHP <= 0)
                     {
                         Death();
-                        if (PlayerLives > 0)
+                        if (PlayerLives <= 0)
                         {
                             GameLose();
                         }
                     }
-                    if (KillCount > 2)
+                    if (KillCount >= 5)
                     {
                         GameWin();
                     }
@@ -61,7 +61,7 @@ namespace VariablesProject
                     {
                         Environment.Exit(0);
                     }
-                    Console.WriteLine("Press E to Heal back to full HP.");
+                    Console.WriteLine("\nPress E to Heal back to full HP.\n");
                     if (Console.ReadKey().Key == ConsoleKey.E)
                     {
                         Heal();
@@ -121,7 +121,6 @@ namespace VariablesProject
         {
             PlayerLives -= 1;
             Console.WriteLine("You Died!");
-            HUD();
             Console.WriteLine("Press any key to try again.");
             Console.ReadKey();
             Heal();
@@ -138,16 +137,13 @@ namespace VariablesProject
             Console.WriteLine("You Win!");
             Console.WriteLine("Press any key to Exit");
             Console.ReadKey();
-            Console.WriteLine();
             GameEnd();
         }
         static void GameLose()
         {
             Console.WriteLine("You Lose!");
-            HUD();
             Console.WriteLine("Press any key to Exit");
             Console.ReadKey();
-            Console.WriteLine();
             GameEnd();
         }
         static void Heal()
