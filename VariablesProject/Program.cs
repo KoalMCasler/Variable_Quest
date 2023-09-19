@@ -41,7 +41,7 @@ namespace VariablesProject
             Encounter();
             while (CurrentHP > 0)
                 {
-                    Console.WriteLine("Press a Key to attack!");
+                    Console.WriteLine("Press any Key to attack!");
                     Console.ReadKey();
                     Combat();
                     HUD();
@@ -60,6 +60,12 @@ namespace VariablesProject
                     if (GameIsOver == true)
                     {
                         Environment.Exit(0);
+                    }
+                    Console.WriteLine("Press E to Heal back to full HP.");
+                    if (Console.ReadKey().Key == ConsoleKey.E)
+                    {
+                        Heal();
+                        HUD();
                     }
                 }
         }
@@ -103,7 +109,7 @@ namespace VariablesProject
         }
         static void ScoreCalc()
         {
-            TotalScore = ScoreMulti * BaseScore;
+            TotalScore += ScoreMulti * BaseScore;
         }
         static void GameEnd()
         {
@@ -140,6 +146,10 @@ namespace VariablesProject
             Console.ReadKey();
             Console.WriteLine();
             GameEnd();
+        }
+        static void Heal()
+        {
+            CurrentHP = MaxHp;
         }
     }
 }
