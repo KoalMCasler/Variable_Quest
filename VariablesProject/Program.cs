@@ -26,11 +26,11 @@ namespace VariablesProject
             static int KillCount;
             static bool GameIsOver;
 
-        static void Main(string[] args)
+        static void Main()
         {
             Startup();
             Console.WriteLine("Variable Quest!");
-            Console.WriteLine("By: " + RealName + " Of " + StudioName);
+            Credit(RealName,StudioName);
             Console.WriteLine("*************************");
             Console.WriteLine();
             HUD();
@@ -150,6 +150,10 @@ namespace VariablesProject
         static void Heal()
         {
             CurrentHP = MaxHp;
+        }
+        static void Credit(string PName, string SName)
+        {
+            Console.WriteLine("By: " + PName + " Of " + SName);
         }
     }
 }
