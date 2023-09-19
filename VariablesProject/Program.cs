@@ -89,6 +89,7 @@ namespace VariablesProject
             CurrentHP = CurrentHP - EnemyDam;
             EnemyHp = EnemyHp - PlayerDam;
             Console.WriteLine("The Enemy has " + EnemyHp + "HP left.");
+            Console.WriteLine("\n");
             if (EnemyHp <= 0)
             {
                 Console.WriteLine("You killed the enemy!");
@@ -106,6 +107,7 @@ namespace VariablesProject
             Console.WriteLine("Your Lives = " + PlayerLives);
             Console.WriteLine("Your Kills = " + KillCount);
             Console.WriteLine("**********");
+            Console.WriteLine("\n");
         }
         static void ScoreCalc()
         {
@@ -122,7 +124,7 @@ namespace VariablesProject
             HUD();
             Console.WriteLine("Press any key to try again.");
             Console.ReadKey();
-            CurrentHP = MaxHp;
+            Heal();
         }
         static void Encounter()
         {
@@ -131,8 +133,9 @@ namespace VariablesProject
         }
         static void GameWin()
         {
-            Console.WriteLine("You Win!");
             HUD();
+            Credit(RealName,StudioName);
+            Console.WriteLine("You Win!");
             Console.WriteLine("Press any key to Exit");
             Console.ReadKey();
             Console.WriteLine();
