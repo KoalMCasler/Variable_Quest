@@ -28,15 +28,17 @@ namespace VariablesProject
             static string EnemyName;
             static List<string> EnemyList;
             static int ListIndex;
+            static string StarLine;
 
         static void Main()
         {
             Startup();
             Console.WriteLine("Variable Quest!");
             Credit(RealName,StudioName);
-            Console.WriteLine("*************************");
+            Console.WriteLine(StarLine);
             Console.WriteLine();
             HUD();
+            Console.WriteLine("Get 5 kills to win!");
             Console.WriteLine("Press any key to get started!");
             Console.WriteLine();
             Console.WriteLine();
@@ -90,6 +92,7 @@ namespace VariablesProject
             StudioName = "Shrouded Fortress Entertainment";
             GameIsOver = false;
             EnemyList = new List<string>{" Float", " Int"," Bool"};
+            StarLine = "**************************************************************************";
         }
         static void Combat()
         {
@@ -109,12 +112,12 @@ namespace VariablesProject
         }
         static void HUD()
         {
-            Console.WriteLine("**********");
+            Console.WriteLine(StarLine);
             Console.WriteLine("Your Score = " + TotalScore);
             Console.WriteLine("Your Hp = " + CurrentHP);
             Console.WriteLine("Your Lives = " + PlayerLives);
             Console.WriteLine("Your Kills = " + KillCount);
-            Console.WriteLine("**********");
+            Console.WriteLine(StarLine);
             Console.WriteLine("\n");
         }
         static void ScoreCalc()
@@ -142,9 +145,9 @@ namespace VariablesProject
         static void GameWin()
         {
             HUD();
-            Credit(RealName,StudioName);
             Console.WriteLine("You Win!");
             Console.WriteLine("Press any key to Exit");
+            Credit(RealName,StudioName);
             Console.ReadKey();
             GameEnd();
         }
