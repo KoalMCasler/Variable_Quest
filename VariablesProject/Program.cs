@@ -37,13 +37,16 @@ namespace VariablesProject
             Console.WriteLine("*************************");
             Console.WriteLine();
             HUD();
-            Console.WriteLine("Press any key to Continue.");
+            Console.WriteLine("Press any key to get started!");
             Console.WriteLine();
-            Console.ReadKey();
             Console.WriteLine();
             Encounter();
             while (CurrentHP > 0)
                 {
+                    if (Console.ReadKey().Key == ConsoleKey.Backspace)
+                    {
+                        GameEnd();
+                    }
                     Console.WriteLine("\nPress any Key to attack!");
                     Console.ReadKey();
                     Combat();
