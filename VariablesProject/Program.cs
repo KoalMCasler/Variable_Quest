@@ -25,6 +25,9 @@ namespace VariablesProject
             static int PlayerLives;
             static int KillCount;
             static bool GameIsOver;
+            static string EnemyName;
+            static List<string> EnemyList;
+            static int ListIndex;
 
         static void Main()
         {
@@ -83,19 +86,22 @@ namespace VariablesProject
             RealName = "Koal Casler";
             StudioName = "Shrouded Fortress Entertainment";
             GameIsOver = false;
+            Random rnd = new Random();
+            EnemyList = new List<string>{" Float", " Int"," Bool"};
         }
         static void Combat()
         {
-            CurrentHP = CurrentHP - EnemyDam;
-            EnemyHp = EnemyHp - PlayerDam;
-            Console.WriteLine("The Enemy has " + EnemyHp + "HP left.");
+            CurrentHP -=  EnemyDam;
+            EnemyHp -=  PlayerDam;
+            Console.WriteLine("The Enemy" + EnemyName + " has " + EnemyHp + "HP left.");
             Console.WriteLine("\n");
             if (EnemyHp <= 0)
             {
-                Console.WriteLine("You killed the enemy!");
+                Console.WriteLine("You killed the enemy" + EnemyName + "!");
                 EnemyHp = EnemyMaxHp;
                 ScoreCalc();
                 KillCount += 1;
+                Encounter();
             }
             
         }
@@ -127,8 +133,9 @@ namespace VariablesProject
         }
         static void Encounter()
         {
-            Console.WriteLine("You encounter a wild Float!");
-            Console.WriteLine("The enemy Float has " + EnemyHp + " Total HP!");
+            EnemyRandomizer();
+            Console.WriteLine("You encounter a wild" + EnemyName + "!");
+            Console.WriteLine("The enemy" + EnemyName + " has " + EnemyHp + " Total HP!");
         }
         static void GameWin()
         {
@@ -154,5 +161,12 @@ namespace VariablesProject
         {
             Console.WriteLine("By: " + PName + " Of " + SName);
         }
+        static void EnemyRandomizer()
+        {
+            Random rnd = new Random();
+            ListIndex = rnd.Next(3);
+            EnemyName = EnemyList.ElementAt(ListIndex);
+        }
+
     }
 }
