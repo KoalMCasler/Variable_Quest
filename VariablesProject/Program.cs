@@ -86,7 +86,6 @@ namespace VariablesProject
             RealName = "Koal Casler";
             StudioName = "Shrouded Fortress Entertainment";
             GameIsOver = false;
-            Random rnd = new Random();
             EnemyList = new List<string>{" Float", " Int"," Bool"};
         }
         static void Combat()
