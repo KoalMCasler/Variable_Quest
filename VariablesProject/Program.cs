@@ -46,6 +46,7 @@ namespace VariablesProject
             static string StarLine;
             static List<string> WeaponList;
             static int WLIndex;
+            static string WeaponName;
 
         static void Main()
         {
@@ -99,6 +100,12 @@ namespace VariablesProject
                         Heal();
                         HUD();
                     }
+                    Console.WriteLine("\nPress F to change weapons.\n");
+                    if (Console.ReadKey().Key == ConsoleKey.F)
+                    {
+                        WeaponRandomizer();
+                        HUD();
+                    }
                 }
         }
         static void Startup()
@@ -117,6 +124,7 @@ namespace VariablesProject
             StudioName = "Shrouded Fortress Entertainment";
             GameIsOver = false;
             EnemyList = new List<string>{" Float", " Int"," Bool"};
+            WeaponList = new List<string> { " Stick", " Dagger", " Short Sword", " Long Sword", " Great Sword" };
             StarLine = "**************************************************************************";
             WeaponRandomizer();
         }
@@ -145,6 +153,7 @@ namespace VariablesProject
             Console.WriteLine("Your Hp = " + CurrentHP);
             Console.WriteLine("Your Lives = " + PlayerLives);
             Console.WriteLine("Your Kills = " + KillCount);
+            Console.WriteLine("You have a" + WeaponName);
             Console.WriteLine(StarLine);
             Console.WriteLine("\n");
         }
@@ -196,6 +205,10 @@ namespace VariablesProject
         {
             // heals player to max HP
             CurrentHP = MaxHp;
+        }
+        static void ChangeWeapon()
+        {
+            WeaponRandomizer();
         }
         static void Credit(string PName, string SName)
         {
