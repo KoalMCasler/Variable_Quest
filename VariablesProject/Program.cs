@@ -41,12 +41,15 @@ namespace VariablesProject
             // List of Enemy names
             static List<string> EnemyList;
             // Index for enemy list to pull one at random.
-            static int ListIndex;
+            static int ELIndex;
             // Fancy line breaks
             static string StarLine;
             static List<string> WeaponList;
             static int WLIndex;
             static string WeaponName;
+            static int BaseShield;
+            static int CurrentShield;
+            
 
         static void Main()
         {
@@ -58,7 +61,8 @@ namespace VariablesProject
             Console.WriteLine();
             HUD();
             Console.WriteLine("Get 5 kills to win!");
-            Console.WriteLine("Press any key to get started!");
+            Console.WriteLine("Press Space to get started!");
+            Console.WriteLine("Press Backspace at any time to close.");
             Console.WriteLine();
             Console.WriteLine();
             Encounter();
@@ -73,7 +77,6 @@ namespace VariablesProject
                     Console.WriteLine("\nPress any Key to attack!");
                     Combat();
                     HUD();
-                    Console.ReadKey();
                     // Player death trigger
                     if (CurrentHP <= 0)
                     {
@@ -106,20 +109,20 @@ namespace VariablesProject
                         WeaponRandomizer();
                         HUD();
                     }
+                    Console.WriteLine("\nPress T to restart the game.\n");
+                    if (Console.ReadKey().Key == ConsoleKey.T)
+                    {
+                        Startup();
+                        HUD();
+                    }
                 }
         }
         static void Startup()
         {
-            // The instillation 
-            PlayerLives = 3;
-            EnemyMaxHp = 15;
-            EnemyHp = EnemyMaxHp;
-            MaxHp = 20;
+            // The instillation
+            Stats();
+            CurrentShield = BaseShield;
             CurrentHP = MaxHp;
-            PlayerDam = 5;
-            EnemyDam = 2;
-            ScoreMulti = 2;
-            BaseScore = 100;
             RealName = "Koal Casler";
             StudioName = "Shrouded Fortress Entertainment";
             GameIsOver = false;
@@ -127,6 +130,20 @@ namespace VariablesProject
             WeaponList = new List<string> { " Stick", " Dagger", " Short Sword", " Long Sword", " Great Sword" };
             StarLine = "**************************************************************************";
             WeaponRandomizer();
+        }
+        static void Stats()
+        {
+            //            v Change These to test Code!
+            BaseShield = 100;
+            TotalScore = 0;
+            PlayerLives = 3;
+            EnemyMaxHp = 100;
+            MaxHp = 100;
+            PlayerDam = 10; // Multiplied by Weapon index to give the true damage. 
+            EnemyDam = 10; // Multiplied by index to increase damage based on what enemy you fight. 
+            ScoreMulti = 2;
+            BaseScore = 100;
+            //            ^ Change these to test Code!
         }
         static void Combat()
         {
@@ -151,6 +168,7 @@ namespace VariablesProject
             Console.WriteLine(StarLine);
             Console.WriteLine("Your Score = " + TotalScore);
             Console.WriteLine("Your Hp = " + CurrentHP);
+            Console.WriteLine("Your Shield = " + CurrentShield);
             Console.WriteLine("Your Lives = " + PlayerLives);
             Console.WriteLine("Your Kills = " + KillCount);
             Console.WriteLine("You have a" + WeaponName);
@@ -174,7 +192,7 @@ namespace VariablesProject
             Console.WriteLine("You Died!");
             Console.WriteLine("Press any key to try again.");
             Console.ReadKey();
-            Heal();
+            Heal(MaxHp);
         }
         static void Encounter()
         {
@@ -201,10 +219,10 @@ namespace VariablesProject
             Console.ReadKey();
             GameEnd();
         }
-        static void Heal()
+        static void Heal(int HP)
         {
-            // heals player to max HP
-            CurrentHP = MaxHp;
+            // heals player to the HP used in heal function.
+            CurrentHP = HP;
         }
         static void ChangeWeapon()
         {
@@ -219,14 +237,50 @@ namespace VariablesProject
         {
             // Pulls random enemy from list of enemies
             Random rnd = new Random();
-            ListIndex = rnd.Next(3);
-            EnemyName = EnemyList.ElementAt(ListIndex);
+            ELIndex = rnd.Next(3);
+            EnemyName = EnemyList.ElementAt(ELIndex);
+            EnemyHp = EnemyMaxHp - ((ELIndex+1)*10);
         }
         static void WeaponRandomizer()
         {
             Random rnd = new Random();
             WLIndex = rnd.Next(5);
             WeaponName = WeaponList.ElementAt(WLIndex);
+        }
+        static void RefillShield(int Shield)
+        {
+            CurrentShield = Shield;
+        }
+        static void TakeDamage(int Damage)
+        {
+            int DamageDeduction;
+            Damage = EnemyDam * (ELIndex + 1);
+            if (Damage <= 0)
+            {
+                Console.WriteLine("Damage Cannot Be 0 or less.");
+                return;
+            }
+            else
+            {
+                if(CurrentShield > 0)
+                {
+                    DamageDeduction = CurrentShield - Damage
+                }
+                //CurrentHP -= Damage;
+            }
+        }
+        static void DoDamage(int Damage)
+        {
+            if (Damage <= 0)
+            {
+                Console.WriteLine("Damage Cannot Be 0 or less.");
+                return;
+            }
+            else
+            {
+
+            }
+
         }
 
     }
