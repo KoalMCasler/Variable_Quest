@@ -44,6 +44,8 @@ namespace VariablesProject
             static int ListIndex;
             // Fancy line breaks
             static string StarLine;
+            static List<string> WeaponList;
+            static int WLIndex;
 
         static void Main()
         {
@@ -68,9 +70,9 @@ namespace VariablesProject
                         GameEnd();
                     }
                     Console.WriteLine("\nPress any Key to attack!");
-                    Console.ReadKey();
                     Combat();
                     HUD();
+                    Console.ReadKey();
                     // Player death trigger
                     if (CurrentHP <= 0)
                     {
@@ -116,6 +118,7 @@ namespace VariablesProject
             GameIsOver = false;
             EnemyList = new List<string>{" Float", " Int"," Bool"};
             StarLine = "**************************************************************************";
+            WeaponRandomizer();
         }
         static void Combat()
         {
@@ -205,6 +208,12 @@ namespace VariablesProject
             Random rnd = new Random();
             ListIndex = rnd.Next(3);
             EnemyName = EnemyList.ElementAt(ListIndex);
+        }
+        static void WeaponRandomizer()
+        {
+            Random rnd = new Random();
+            WLIndex = rnd.Next(5);
+            WeaponName = WeaponList.ElementAt(WLIndex);
         }
 
     }
